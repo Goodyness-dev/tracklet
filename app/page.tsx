@@ -1,13 +1,13 @@
 "use client"
  import React, { useState } from 'react';
 import { ethers } from 'ethers';
-import NftsContainer from './Components/connect';
+
 import NftsPage from './Sections/nft';
 import Balance from './Sections/balance';
 import Transaction from './Sections/Transaction';
 export default function Home() {
  
-    const [provider, setProvider] = useState<ethers.BrowserProvider| null>(null)
+
     const [address, setAddress] = useState<string>("")
   return (
   
