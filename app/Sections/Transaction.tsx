@@ -41,8 +41,10 @@ export default function Transaction({ wallet }: TransactionProps) {
           // If no transactions returned, disable "Load More"
           setHasMore(false);
         }
-      } catch (err: any) {
-        setError(err.message || "Something went wrong");
+      } catch (err) {
+            const error = err as Error;
+    setError(error.message || "Something went wrong");
+   
       } finally {
         setLoadingTxs(false);
       }

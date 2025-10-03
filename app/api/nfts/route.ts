@@ -1,4 +1,39 @@
 import { NextResponse } from "next/server";
+type OwnedNft={
+  
+  image?: {
+    cachedUrl?: string;
+    pngUrl?: string;
+    thumbnailUrl?: string;
+  };
+  contractMetadata?: {
+    imageUrl?: string;
+    openSeaMetadata?: {
+      imageUrl?: string;
+      bannerImageUrl?: string;
+    };
+    openSea:{
+      bannerImageUrl: string
+    }
+  };
+  resolvedImage?: string;
+  contract?: {
+    openSeaMetadata: {
+      bannerImageUrl: string
+    }
+
+  }
+    media?: {
+    gateway?: string;
+    raw?: string;
+    thumbnail?: string;
+    format?: string;
+  }[];
+   rawMetadata?:{
+    image: string
+   }
+};  
+
 
 export async function GET(request: Request) {
   try {
@@ -36,14 +71,13 @@ export async function GET(request: Request) {
     };
 
     // 🔹 Enrich NFTs with resolvedImage
-    const enrichedNFTs = ownedNFTs.map((nft: any) => {
+    const enrichedNFTs = ownedNFTs.map((nft:OwnedNft) => {
       let imageUrl =
         nft.media?.[0]?.gateway || // ✅ Primary Alchemy media
         nft.image?.cachedUrl || // ✅ Alchemy cached
         nft.image?.pngUrl || // ✅ PNG fallback
         nft.image?.thumbnailUrl || // ✅ Thumbnail
         nft.rawMetadata?.image || // ✅ Sometimes only in raw metadata
-        nft.contract?.openSeaMetadata?.imageUrl || // ✅ OpenSea metadata inside Alchemy
              nft.contractMetadata?.openSea.bannerImageUrl
         nft.contract?.openSeaMetadata?.bannerImageUrl || // ✅ Another OpenSea fallback
    
@@ -65,11 +99,14 @@ export async function GET(request: Request) {
     });
 
     return NextResponse.json({ nfts: enrichedNFTs });
-  } catch (error: any) {
-    console.error("Route crashed:", error);
-    return NextResponse.json(
-      { error: "Server error", details: error.message },
-      { status: 500 }
-    );
-  }
+  } catch (error: unknown) {
+  const err = error as Error;
+  console.error("Route crashed:", err);
+
+  return NextResponse.json(
+    { error: "Server error", details: err.message },
+    { status: 500 }
+  );
+}
+
 }

@@ -38,8 +38,9 @@ export default function Balance({ wallet,setWallet }: BalanceProps) {
 
         const data = await res.json();
         setWalletBalance(data);
-      } catch (err: any) {
-        setError(err.message || "Something went wrong");
+      } catch (err) {
+            const error = err as Error;
+    setError(error.message || "Something went wrong");
       } finally {
         setLoading(false);
       }

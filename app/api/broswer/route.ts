@@ -69,10 +69,18 @@ export async function GET(request: Request) {
       address,
       balances,
     });
-  } catch (error: any) {
+  } catch (error) {
+  if (error instanceof Error) {
     return NextResponse.json(
-      { error: error.message || "failed to fetch balance" },
+      { error: error.message },
       { status: 500 }
     );
   }
+
+  return NextResponse.json(
+    { error: "Failed to fetch balance" },
+    { status: 500 }
+  );
 }
+    
+  }

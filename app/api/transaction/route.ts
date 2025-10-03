@@ -38,10 +38,18 @@ export async function GET(request: Request) {
         offset: Number(offset),
       },
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
+  if (err instanceof Error) {
     return NextResponse.json(
       { error: "Server error", details: err.message },
       { status: 500 }
     );
   }
+
+  return NextResponse.json(
+    { error: "Server error", details: "Unknown error" },
+    { status: 500 }
+  );
+}
+
 }
