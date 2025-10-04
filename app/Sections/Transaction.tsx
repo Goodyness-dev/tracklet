@@ -72,7 +72,7 @@ export default function Transaction({ wallet }: TransactionProps) {
             txs.map((tx) => (
               <li
                 key={tx.hash}
-                className="border border-amber-200 rounded-lg p-3 shadow-sm mx-auto flex items-center justify-center"
+                className="border border-amber-200 rounded-lg p-3 shadow-sm mx-auto flex items-center justify-center m-10"
               >
                 <div>
                   <p className="p-5">
