@@ -37,6 +37,7 @@ export default function Transaction({ wallet }: TransactionProps) {
         if (data.transactions && data.transactions.length > 0) {
           // Append new transactions
           setTxs((prev) => [...prev, ...data.transactions]);
+           setHasMore(data.transactions.length === 100);
         } else {
           // If no transactions returned, disable "Load More"
           setHasMore(false);
@@ -55,10 +56,12 @@ export default function Transaction({ wallet }: TransactionProps) {
 
   return (
     <div className="p-4">
-{loadingTxs &&
+
+{txs.length> 0 &&
 <div className="flex justify-center p-8">
         <h2 className="text-6xl text-white font-bold mb-3">Transactions</h2>
-      </div>}
+      </div>
+}
 
       {loadingTxs && page === 1 && <p>Loading transactions...</p>}
       {error && <p className="text-red-500">{error}</p>}
@@ -69,7 +72,7 @@ export default function Transaction({ wallet }: TransactionProps) {
             txs.map((tx) => (
               <li
                 key={tx.hash}
-                className="border rounded-lg p-3 shadow-sm mx-auto flex items-center justify-center"
+                className="border border-amber-200 rounded-lg p-3 shadow-sm mx-auto flex items-center justify-center"
               >
                 <div>
                   <p className="p-5">

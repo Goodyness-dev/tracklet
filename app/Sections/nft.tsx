@@ -48,7 +48,7 @@ export default function NftsPage({ wallet, setWallet }: NftsPageProps) {
 
         const data = await res.json();
         setNfts(data.nfts || []);
-        console.log("NFTs fetched:", data.nfts);
+      
       } catch (err) {
            const error = err as Error;
     setError(error.message || "Something went wrong");
@@ -81,8 +81,8 @@ export default function NftsPage({ wallet, setWallet }: NftsPageProps) {
       {error && <p className="text-red-500">{error}</p>}
 
       {/* NFTs Grid */}
-      
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full max-w-6xl">
+    
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full max-w-6xl">
         {nfts.map((nft, i) => (
           <div
             key={i}
@@ -94,7 +94,7 @@ export default function NftsPage({ wallet, setWallet }: NftsPageProps) {
               alt={nft.title || nft.description || "NFT"}
               className="w-full h-48 object-cover rounded-lg"
               onError={(e) =>
-                ((e.target as HTMLImageElement).src = "/pro.jpg")
+                ((e.target as HTMLImageElement).src = "/fallback.jpeg")
               }
             />
 
@@ -102,9 +102,9 @@ export default function NftsPage({ wallet, setWallet }: NftsPageProps) {
               {nft.title || "Untitled NFT"}
             </p>
 
-            {nft.contract?.openSeaMetadata?.floorPrice ? (
-              <p className="text-sm text-gray-600">
-                Floor: {nft.contractMetadata.openSea.floorPrice} ETH
+            {nft.contractMetadata?.openSea?.floorPrice ? (
+              <p className="text-lg text-gray-600">
+                Floor price: {nft.contractMetadata.openSea.floorPrice.toFixed(4)} ETH
               </p>
             ) : (
               <p className="text-sm text-gray-400"></p>

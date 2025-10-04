@@ -59,11 +59,11 @@ export default function Balance({ wallet,setWallet }: BalanceProps) {
       {error && <p className="text-red-500">{error}</p>}
       <div className='flex justify-center'>
       {walletBalance && (
-        <div className="flex gap-5">
+        <div className="flex gap-5 flex-col md:flex-row ">
           {walletBalance.balances.map((chain) => (
             <div
               key={chain.chain}
-              className="border p-10 rounded shadow hover:shadow-lg transition "
+              className="border border-amber-200 p-10 rounded shadow hover:shadow-lg transition "
             >
               <h3 className="font-semibold capitalize text-6xl text-white">{chain.chain}</h3>
               {chain.error ? (

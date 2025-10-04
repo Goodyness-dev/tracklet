@@ -11,7 +11,7 @@ export default function Home() {
     const [address, setAddress] = useState<string>("")
   return (
   
-    <div className='p-10'>
+    <div className='p-10 md:p-15'>
 
      
     <h1
@@ -23,7 +23,10 @@ export default function Home() {
   Tracklet
 </h1>
 <div className=''>
-  <p className='flex justify-center items-center text-3xl text-white p-20'>Paste the wallet address you want to track here...(eth only)</p>
+<p className="text-sm sm:text-3xl text-white text-center p-5 sm:p-20 break-words">
+  Paste the wallet address you want to track here... (ETH only)
+</p>
+
 
 <NftsPage setWallet={setAddress} wallet={address}/>
 <Balance setWallet={setAddress} wallet={address}/>
