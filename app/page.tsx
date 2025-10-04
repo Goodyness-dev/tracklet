@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import NftsPage from './Sections/nft';
 import Balance from './Sections/balance';
 import Transaction from './Sections/Transaction';
+import Footer from './Sections/Footer';
 export default function Home() {
       const [address, setAddress] = useState<string>("")
       const pageText = useRef<HTMLParagraphElement>(null)
@@ -69,6 +70,7 @@ export default function Home() {
 <NftsPage setWallet={setAddress} wallet={address}/>
 <Balance setWallet={setAddress} wallet={address}/>
  <Transaction setWallet={setAddress} wallet={address}/>
+ <Footer/>
     </div>
     </div>
   );
