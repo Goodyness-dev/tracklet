@@ -49,7 +49,7 @@ export default function Home() {
 
   return (
   
-    <div className='p-10 md:p-15'>
+    <div className='p-10 w-fulltoken h-full md:p-15'>
 
      
     <h1

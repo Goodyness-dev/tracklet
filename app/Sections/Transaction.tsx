@@ -66,49 +66,50 @@ export default function Transaction({ wallet }: TransactionProps) {
       {loadingTxs && page === 1 && <p>Loading transactions...</p>}
       {error && <p className="text-red-500">{error}</p>}
 
-      <div className="flex justify-center items-center">
-        <ul className="space-y-5 w-fit items-center">
-          {txs.length > 0 ? (
-            txs.map((tx) => (
-          <li
-  key={tx.hash}
-  className="border border-amber-200 rounded-lg shadow-sm mx-auto w-full max-w-md my-4 px-4 sm:px-6"
->
-  <div>
-    <p className="p-2 sm:p-4">
-      <span className="font-medium text-white">Hash:</span>{" "}
-      <a
-        href={`https://etherscan.io/tx/${tx.hash}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-blue-600 underline"
-      >
-        {tx.hash.slice(0, 10)}...
-      </a>
-    </p>
-    <p className="text-amber-50 p-2 sm:p-4">
-      <span className="font-medium">From:</span> {tx.from}
-    </p>
-    <p className="text-amber-50 p-2 sm:p-4">
-      <span className="font-medium">To:</span> {tx.to}
-    </p>
-    <p className="text-amber-50 p-2 sm:p-4">
-      <span className="font-medium">Value:</span>{" "}
-      {ethers.formatEther(tx.value)} ETH
-    </p>
-    <p className="text-amber-50 p-2 sm:p-4">
-      <span className="font-medium">Date:</span>{" "}
-      {new Date(Number(tx.timeStamp) * 1000).toLocaleString()}
-    </p>
-  </div>
-</li>
-
-            ))
-          ) : (
-            <p className="text-gray-900">No transactions found</p>
-          )}
-        </ul>
-      </div>
+   <div className="flex justify-center items-center">
+  <ul
+    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-6 w-full max-w-7xl p-4"
+  >
+    {txs.length > 0 ? (
+      txs.map((tx) => (
+        <li
+          key={tx.hash}
+          className="bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden hover:border-blue-500/50 transition-all duration-300 hover:scale-[1.02] p-4"
+        >
+          <p className="p-2">
+            <span className="font-medium text-white">Hash:</span>{" "}
+            <a
+              href={`https://etherscan.io/tx/${tx.hash}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 underline"
+            >
+              {tx.hash.slice(0, 10)}...
+            </a>
+          </p>
+          <p className="text-amber-50 p-2 break-all">
+            <span className="font-medium">From:</span> {tx.from}
+          </p>
+          <p className="text-amber-50 p-2  break-all">
+            <span className="font-medium">To:</span> {tx.to}
+          </p>
+          <p className="text-amber-50 p-2">
+            <span className="font-medium">Value:</span>{" "}
+            {ethers.formatEther(tx.value)} ETH
+          </p>
+          <p className="text-amber-50 p-2">
+            <span className="font-medium">Date:</span>{" "}
+            {new Date(Number(tx.timeStamp) * 1000).toLocaleString()}
+          </p>
+        </li>
+      ))
+    ) : (
+      <p className="text-gray-900 col-span-full text-center">
+        No transactions found
+      </p>
+    )}
+  </ul>
+</div>
 
       {/* Load More Button */}
       {hasMore && (

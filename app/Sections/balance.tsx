@@ -63,7 +63,8 @@ export default function Balance({ wallet,setWallet }: BalanceProps) {
           {walletBalance.balances.map((chain) => (
             <div
               key={chain.chain}
-              className="border border-amber-200 p-10 rounded shadow hover:shadow-lg transition "
+              className="bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden p-10
+               hover:border-blue-500/50 transition-all duration-300 hover:transform hover:scale-[1.02] group"
             >
               <h3 className="font-semibold capitalize text-6xl text-white">{chain.chain}</h3>
               {chain.error ? (
